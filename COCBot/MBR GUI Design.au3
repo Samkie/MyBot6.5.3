@@ -108,7 +108,7 @@ $tabVillage = GUICtrlCreateTabItem(GetTranslated(600,2, "Village")) ; Village
 $tabAttack = GUICtrlCreateTabItem(GetTranslated(600,3,"Attack Plan"))
 $tabBot = GUICtrlCreateTabItem(GetTranslated(600,4,"Bot"))
 ; samm0d
-$tabMod = GUICtrlCreateTabItem("SamM0d v0.7.2")
+$tabMod = GUICtrlCreateTabItem("SamM0d v0.7.3")
 ;~ -------------------------------------------------------------
 ;~ About Us Tab
 ;~ -------------------------------------------------------------

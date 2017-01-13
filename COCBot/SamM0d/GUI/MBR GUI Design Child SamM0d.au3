@@ -230,21 +230,21 @@ $chkSkipCollectorCheckIF = GUICtrlCreateCheckbox(GetTranslated(671, 17, "Skip ou
 		$lblSkipCollectorGold = GUICtrlCreateLabel(ChrW(8805), $x + 22, $y + 2, -1, -1)
 		GUICtrlCreateIcon ($pIconLib, $eIcnGold, $x + 82, $y, 16, 16)
 		$txtSkipCollectorGold = GUICtrlCreateInput("400000", $x + 30, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
-			$txtTip = GetTranslated(610,37, "Skip outside collectors check IF target Gold value over")
+			$txtTip = "Skip outside collectors check IF target Gold value over"
 			_GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 7)
 	$x += 90
 		$lblSkipCollectorElixir = GUICtrlCreateLabel(ChrW(8805), $x + 22, $y + 2, -1, -1)
 		GUICtrlCreateIcon ($pIconLib, $eIcnElixir, $x + 82, $y, 16, 16)
 		$txtSkipCollectorElixir = GUICtrlCreateInput("400000", $x + 30, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
-			$txtTip = GetTranslated(610,38, "Skip outside collectors check IF target Elixir value over")
+			$txtTip = "Skip outside collectors check IF target Elixir value over"
 			_GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 7)
 	$x += 90
 		$lblSkipCollectorDark = GUICtrlCreateLabel(ChrW(8805), $x + 22, $y + 2, -1, -1)
 		GUICtrlCreateIcon ($pIconLib, $eIcnDark, $x + 82, $y, 16, 16)
 		$txtSkipCollectorDark = GUICtrlCreateInput("0", $x + 30, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
-			$txtTip = GetTranslated(610,39, "Skip outside collectors check IF target Dark Elixir value over")
+			$txtTip = "Skip outside collectors check IF target Dark Elixir value over"
 			_GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 6)
 $x = 10

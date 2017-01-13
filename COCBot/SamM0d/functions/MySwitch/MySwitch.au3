@@ -4,7 +4,7 @@
 ; Syntax ........:getNextSwitchList()
 ; Parameters ....:
 ; Return values .: None
-; Author ........: Samkie (18 Dec 2016)
+; Author ........: Samkie (13 Jan, 2017)
 ; Modified ......:
 ; Remarks .......:
 ; Related .......:
@@ -1001,45 +1001,59 @@ EndFunc
 Func checkProfileCorrect()
 	If IsMainPage() Then
 		Click($aButtonOpenProfile[0],$aButtonOpenProfile[1],1,0,"#0222")
-		Local $iCount
+		If _Sleep(1000) Then Return False
+
+		Local $iCount, $iImageNotMatchCount
+		Local $bVillagePageFlag = False
 		$iCount = 0
-		While Not _ColorCheck(_GetPixelColor(85, 163, True), Hex(0X959AB6,6), 20) And Not _ColorCheck(_GetPixelColor(20, 295, True), Hex(0X4E4D79,6), 10)
+		$iImageNotMatchCount = 0
+		ForceCaptureRegion()
+		$bVillagePageFlag = _ColorCheck(_GetPixelColor(85, 163, True), Hex(0X959AB6,6), 20) = True And _ColorCheck(_GetPixelColor(20, 295, True), Hex(0X4E4D79,6), 10) = True
+		While $bVillagePageFlag = False
+			If $iSamM0dDebug = 1 Then SetLog("_GetPixelColor(85, 163, True): " & _GetPixelColor(85, 163, True))
+			If $iSamM0dDebug = 1 Then SetLog("_GetPixelColor(20, 295, True): " & _GetPixelColor(20, 295, True))
 			ClickDrag(380, 140 + $midOffsetY, 380, 580 + $midOffsetY, 1000)
 			$iCount += 1
 			If $iCount > 15 Then
 				SetLog("Cannot load profile page...", $COLOR_RED)
+				ClickP($aAway,1,0)
 				Return False
 			EndIf
 			If _Sleep(1000) Then Return False
-		WEnd
 
-		For $i = 0 To 2
-			_CaptureRegion(68,126,155,145)
-
-			Local $result = DllCall($hImgLib, "str", "FindTile", "handle", $hHBitmap, "str", @ScriptDir & "\profiles\" & $sCurrProfile & "\village_92.png", "str", "FV", "int", 1)
-			If @error Then _logErrorDLLCall($pImgLib, @error)
-			If IsArray($result) Then
-				If $iSamM0dDebug Then SetLog("DLL Call succeeded " & $result[0], $COLOR_ERROR)
-				If $result[0] = "0" Or $result[0] = "" Then
-					If $iSamM0dDebug Then SetLog("Image not found", $COLOR_ERROR)
-				ElseIf StringLeft($result[0], 2) = "-1" Then
-					SetLog("DLL Error: " & $result[0], $COLOR_ERROR)
-				Else
-					If $iSamM0dDebug Then SetLog("$result[0]: " & $result[0])
-					Local $aCoor = StringSplit($result[0],"|",$STR_NOCOUNT)
-					If IsArray($aCoor) Then
-						If StringLeft($aCoor[1], 2) <> "-1" Then
-							ClickP($aAway,1,0)
-							If _Sleep(1000) Then Return True
-							Return True
+			$bVillagePageFlag = _ColorCheck(_GetPixelColor(85, 163, True), Hex(0X959AB6,6), 20) = True And _ColorCheck(_GetPixelColor(20, 295, True), Hex(0X4E4D79,6), 10) = True
+			If $bVillagePageFlag = True Then
+				_CaptureRegion(68,126,155,145)
+				Local $result = DllCall($hImgLib, "str", "FindTile", "handle", $hHBitmap, "str", @ScriptDir & "\profiles\" & $sCurrProfile & "\village_92.png", "str", "FV", "int", 1)
+				If @error Then _logErrorDLLCall($pImgLib, @error)
+				If IsArray($result) Then
+					If $iSamM0dDebug Then SetLog("DLL Call succeeded " & $result[0], $COLOR_ERROR)
+					If $result[0] = "0" Or $result[0] = "" Then
+						If $iSamM0dDebug Then SetLog("Image not found", $COLOR_ERROR)
+						$bVillagePageFlag = False
+						$iImageNotMatchCount += 1
+						If $iImageNotMatchCount > 3 Then
+							Return False
+						EndIf
+					ElseIf StringLeft($result[0], 2) = "-1" Then
+						SetLog("DLL Error: " & $result[0], $COLOR_ERROR)
+					Else
+						If $iSamM0dDebug Then SetLog("$result[0]: " & $result[0])
+						Local $aCoor = StringSplit($result[0],"|",$STR_NOCOUNT)
+						If IsArray($aCoor) Then
+							If StringLeft($aCoor[1], 2) <> "-1" Then
+								ExitLoop
+							EndIf
 						EndIf
 					EndIf
 				EndIf
+				If _Sleep(1000) Then Return False
 			EndIf
-			If _Sleep(1000) Then Return False
-		Next
+		WEnd
+
 		ClickP($aAway,1,0)
-		If _Sleep(1000) Then Return False
+		If _Sleep(1000) Then Return True
+		Return True
 	EndIf
 	Return False
 EndFunc
