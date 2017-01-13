@@ -167,13 +167,13 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		For $i = $DB To $LB
 			If $iHeroWait[$i] > 0 Then
 				If BitAND($iHeroWait[$i], $HERO_KING) = $HERO_KING And BitAND($iHeroAvailable + $iHeroUpgradingBit, $HERO_KING) <> $HERO_KING Then
-					SETLOG($sModeText[$i] & " Setting - Waiting Barbarian King to recover before start attack.", $COLOR_ACTION)
+					SETLOG(" " & $sModeText[$i] & " Setting - Waiting Barbarian King to recover before start attack.", $COLOR_ACTION)
 				EndIf
 				If BitAND($iHeroWait[$i], $HERO_QUEEN) = $HERO_QUEEN And BitAND($iHeroAvailable + $iHeroUpgradingBit, $HERO_QUEEN) <> $HERO_QUEEN Then
-					SETLOG($sModeText[$i] & " Setting - Waiting Archer Queen to recover before start attack.", $COLOR_ACTION)
+					SETLOG(" " & $sModeText[$i] & " Setting - Waiting Archer Queen to recover before start attack.", $COLOR_ACTION)
 				EndIf
 				If BitAND($iHeroWait[$i], $HERO_WARDEN) = $HERO_WARDEN And BitAND($iHeroAvailable + $iHeroUpgradingBit, $HERO_WARDEN) <> $HERO_WARDEN Then
-					SETLOG($sModeText[$i] & " Setting - Waiting Grand Warden to recover before start attack.", $COLOR_ACTION)
+					SETLOG(" " & $sModeText[$i] & " Setting - Waiting Grand Warden to recover before start attack.", $COLOR_ACTION)
 				EndIf
 			EndIf
 		Next

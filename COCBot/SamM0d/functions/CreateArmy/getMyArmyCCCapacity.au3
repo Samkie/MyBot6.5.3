@@ -88,6 +88,12 @@ Func getArmyCCCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		$FullCCTroops = False
 	EndIf
 
+	If $ichkWait4CC = 1 Then
+		If $FullCCTroops = False Then
+			SETLOG(" All mode - Waiting clan castle troops before start attack.", $COLOR_ACTION)
+		EndIf
+	EndIf
+
 	If $bCloseArmyWindow = True Then
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		If _Sleep($iDelaycheckArmyCamp4) Then Return
