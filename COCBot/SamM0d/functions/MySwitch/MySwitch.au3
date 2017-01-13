@@ -1047,7 +1047,6 @@ Func checkProfileCorrect()
 						EndIf
 					EndIf
 				EndIf
-				If _Sleep(1000) Then Return False
 			EndIf
 		WEnd
 
