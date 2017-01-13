@@ -422,8 +422,6 @@ Func SmartAttackStrategy($imode)
 					EndIf
 				EndIf
 
-				$bIDoScanMineAndElixir = False
-
 				SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
 				If $bIDoScanMineAndElixir = False Then
 					SetLog("[" & UBound($PixelMine) & "] Gold Mines")
@@ -433,6 +431,9 @@ Func SmartAttackStrategy($imode)
 				$iNbrOfDetectedMines[$imode] += UBound($PixelMine)
 				$iNbrOfDetectedCollectors[$imode] += UBound($PixelElixir)
 				$iNbrOfDetectedDrills[$imode] += UBound($PixelDarkElixir)
+
+				$bIDoScanMineAndElixir = False
+
 				UpdateStats()
 			EndIf
 
