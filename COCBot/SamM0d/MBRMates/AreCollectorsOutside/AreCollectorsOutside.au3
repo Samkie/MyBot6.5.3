@@ -6,7 +6,7 @@
 	; Return values .: True					more collectors outside than specified
 	;				 : False				less collectors outside than specified
 	; Author ........: McSlither (Jan-2016)
-	; Modified ......: TheRevenor (Jul 2016), Samkie 15 Nov 2016
+	; Modified ......: TheRevenor (Jul 2016), Samkie (13 Jan 2017)
 	; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2016
 	;                  MyBot is distributed under the terms of the GNU GPL
 	; Related .......:
@@ -51,7 +51,11 @@ Func AreCollectorsOutside($percent)
 
 	If $searchTH = "-" Or $searchTH = "" Then FindTownhall(True)
 	If $searchTH <> "-" Then
-		$radiusAdjustment *= Number($searchTH) / 11
+		$radiusAdjustment *= Number($searchTH) / 10
+	Else
+		If $iTownHallLevel > 0 Then
+			$radiusAdjustment *= Number($iTownHallLevel) / 10
+		EndIf
 	EndIf
 	If $debugsetlog = 1 Then SetLog("$searchTH: " & $searchTH)
 

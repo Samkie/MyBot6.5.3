@@ -378,13 +378,13 @@ Func SmartAttackStrategy($imode)
 			_GetRedArea()
 
 			SetLog("Calculated  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
-			;SetLog("	[" & UBound($PixelTopLeft) & "] pixels TopLeft")
-			;SetLog("	[" & UBound($PixelTopRight) & "] pixels TopRight")
-			;SetLog("	[" & UBound($PixelBottomLeft) & "] pixels BottomLeft")
-			;SetLog("	[" & UBound($PixelBottomRight) & "] pixels BottomRight")
 
 			If ($iChkSmartAttack[$imode][0] = 1 Or $iChkSmartAttack[$imode][1] = 1 Or $iChkSmartAttack[$imode][2] = 1) Then
-				SetLog("Locating Mines, Collectors & Drills", $COLOR_INFO)
+				If $bIDoScanMineAndElixir = False Then
+					SetLog("Locating Mines, Collectors & Drills", $COLOR_INFO)
+				Else
+					SetLog("Locating Drills", $COLOR_INFO)
+				EndIf
 				$hTimer = TimerInit()
 
 				;samm0d
@@ -425,8 +425,10 @@ Func SmartAttackStrategy($imode)
 				$bIDoScanMineAndElixir = False
 
 				SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
-				SetLog("[" & UBound($PixelMine) & "] Gold Mines")
-				SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
+				If $bIDoScanMineAndElixir = False Then
+					SetLog("[" & UBound($PixelMine) & "] Gold Mines")
+					SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
+				EndIf
 				SetLog("[" & UBound($PixelDarkElixir) & "] Dark Elixir Drill/s")
 				$iNbrOfDetectedMines[$imode] += UBound($PixelMine)
 				$iNbrOfDetectedCollectors[$imode] += UBound($PixelElixir)
