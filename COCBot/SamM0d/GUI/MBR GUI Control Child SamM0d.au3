@@ -64,6 +64,24 @@ Func cmbTroopSetting()
 		IniWriteS($config, "MyTroops", $MyTroops[$i][0] & $icmbTroopSetting, GUICtrlRead(Eval("txtMy" & $MyTroops[$i][0])))
 		IniWriteS($config, "MyTroops", $MyTroops[$i][0] & "Order" & $icmbTroopSetting, GUICtrlRead(Eval("cmbMy"& $MyTroops[$i][0] & "Order")))
 	Next
+	For $i = 0 To UBound($MySpells) - 1
+		If GUICtrlRead(Eval("chkPre" & $MySpells[$i][0])) = $GUI_CHECKED Then
+			IniWriteS($config, "MySpells", $MySpells[$i][0] & $icmbTroopSetting, 1)
+		Else
+			IniWriteS($config, "MySpells", $MySpells[$i][0] & $icmbTroopSetting, 0)
+		EndIf
+	Next
+	IniWriteS($config, "Spells", "LightningSpell" & $icmbTroopSetting, GUICtrlRead($txtNumLightningSpell))
+	IniWriteS($config, "Spells", "RageSpell" & $icmbTroopSetting, GUICtrlRead($txtNumRageSpell))
+	IniWriteS($config, "Spells", "HealSpell" & $icmbTroopSetting, GUICtrlRead($txtNumHealSpell))
+	IniWriteS($config, "Spells", "JumpSpell" & $icmbTroopSetting, GUICtrlRead($txtNumJumpSpell))
+	IniWriteS($config, "Spells", "FreezeSpell" & $icmbTroopSetting, GUICtrlRead($txtNumFreezeSpell))
+	IniWriteS($config, "Spells", "CloneSpell" & $icmbTroopSetting, GUICtrlRead($txtNumCloneSpell))
+	IniWriteS($config, "Spells", "PoisonSpell" & $icmbTroopSetting, GUICtrlRead($txtNumPoisonSpell))
+	IniWriteS($config, "Spells", "EarthSpell" & $icmbTroopSetting, GUICtrlRead($txtNumEarthSpell))
+	IniWriteS($config, "Spells", "HasteSpell" & $icmbTroopSetting, GUICtrlRead($txtNumHasteSpell))
+	IniWriteS($config, "Spells", "SkeletonSpell" & $icmbTroopSetting, GUICtrlRead($txtNumSkeletonSpell))
+
 
 	$icmbTroopSetting = _GUICtrlComboBox_GetCurSel($cmbTroopSetting)
 
@@ -73,12 +91,48 @@ Func cmbTroopSetting()
 		$MyTroops[$i][1] =  Number(IniRead($config, "MyTroops", $MyTroops[$i][0] & "Order" & $icmbTroopSetting, $i + 1))
 	Next
 
+	For $i = 0 To UBound($MySpells) - 1
+		Local $tempPreSpell
+		IniReadS($tempPreSpell, $config, "MySpells", $MySpells[$i][0] & $icmbTroopSetting, "0", "Int")
+		Assign("ichkPre" & $MySpells[$i][0], $tempPreSpell)
+		;IniReadS($MySpells[$i][1], $config, "MyTroops", $MySpells[$i][0] & "Order", $i + 1)
+	Next
+	IniReadS($iLightningSpellComp, $config, "Spells", "LightningSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iRageSpellComp, $config, "Spells", "RageSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iHealSpellComp, $config, "Spells", "HealSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iJumpSpellComp, $config, "Spells", "JumpSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iFreezeSpellComp, $config, "Spells", "FreezeSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iCloneSpellComp, $config, "Spells", "CloneSpell" & $icmbTroopSetting, "0", "Int")
+	IniReadS($iPoisonSpellComp, $config, "Spells", "PoisonSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iHasteSpellComp, $config, "Spells", "HasteSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iEarthSpellComp, $config, "Spells", "EarthSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iSkeletonSpellComp, $config, "Spells", "SkeletonSpell" & $icmbTroopSetting, "0", "Int")
+
+
 	For $i = 0 To UBound($MyTroops)-1
 		GUICtrlSetData(Eval("txtMy" & $MyTroops[$i][0]), $MyTroops[$i][3])
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MyTroops[$i][0] & "Order"), $MyTroops[$i][1]-1)
 	Next
+	For $i = 0 To UBound($MySpells)-1
+		If Eval("ichkPre" & $MySpells[$i][0]) = 1 Then
+			GUICtrlSetState(Eval("chkPre" & $MySpells[$i][0]), $GUI_CHECKED)
+		Else
+			GUICtrlSetState(Eval("chkPre" & $MySpells[$i][0]), $GUI_UNCHECKED)
+		EndIf
+	Next
+	GUICtrlSetData($txtNumLightningSpell, $iLightningSpellComp)
+	GUICtrlSetData($txtNumRageSpell, $iRageSpellComp)
+	GUICtrlSetData($txtNumHealSpell, $iHealSpellComp)
+	GUICtrlSetData($txtNumJumpSpell, $iJumpSpellComp)
+	GUICtrlSetData($txtNumFreezeSpell, $iFreezeSpellComp)
+	GUICtrlSetData($txtNumCloneSpell, $iCloneSpellComp)
+	GUICtrlSetData($txtNumPoisonSpell, $iPoisonSpellComp)
+	GUICtrlSetData($txtNumEarthSpell, $iEarthSpellComp)
+	GUICtrlSetData($txtNumHasteSpell, $iHasteSpellComp)
+	GUICtrlSetData($txtNumSkeletonSpell, $iSkeletonSpellComp)
 
 	chkMyTroopOrder()
+	lblMyTotalCountSpell()
 EndFunc
 
 Func cmbMyQuickTrain()
