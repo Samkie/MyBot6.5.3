@@ -232,28 +232,49 @@ EndIf
 
 IniWriteS($config, "MyTroops", "TrainCombo", _GUICtrlComboBox_GetCurSel($cmbMyQuickTrain))
 
-IniWriteS($config, "MyTroops", "Composition", _GUICtrlComboBox_GetCurSel($cmbTroopSetting))
+Local $itempcmbTroopSetting = _GUICtrlComboBox_GetCurSel($cmbTroopSetting)
+
+IniWriteS($config, "MyTroops", "Composition", $itempcmbTroopSetting)
 
 For $i = 0 To UBound($MyTroops) - 1
-	IniWriteS($config, "MyTroops", $MyTroops[$i][0] & _GUICtrlComboBox_GetCurSel($cmbTroopSetting), GUICtrlRead(Eval("txtMy" & $MyTroops[$i][0])))
-	IniWriteS($config, "MyTroops", $MyTroops[$i][0] & "Order" & _GUICtrlComboBox_GetCurSel($cmbTroopSetting), GUICtrlRead(Eval("cmbMy"& $MyTroops[$i][0] & "Order")))
+	IniWriteS($config, "MyTroops", $MyTroops[$i][0] & $itempcmbTroopSetting, GUICtrlRead(Eval("txtMy" & $MyTroops[$i][0])))
+	IniWriteS($config, "MyTroops", $MyTroops[$i][0] & "Order" & $itempcmbTroopSetting, GUICtrlRead(Eval("cmbMy"& $MyTroops[$i][0] & "Order")))
 Next
 
-For $i = 0 To UBound($MySpells) - 1
-	If GUICtrlRead(Eval("chkPre" & $MySpells[$i][0])) = $GUI_CHECKED Then
-		IniWriteS($config, "MySpells", $MySpells[$i][0], 1)
-	Else
-		IniWriteS($config, "MySpells", $MySpells[$i][0], 0)
-	EndIf
-Next
+	For $i = 0 To UBound($MySpells) - 1
+		If GUICtrlRead(Eval("chkPre" & $MySpells[$i][0])) = $GUI_CHECKED Then
+			IniWriteS($config, "MySpells", $MySpells[$i][0] & $itempcmbTroopSetting, 1)
+		Else
+			IniWriteS($config, "MySpells", $MySpells[$i][0] & $itempcmbTroopSetting, 0)
+		EndIf
+	Next
+	IniWriteS($config, "Spells", "LightningSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumLightningSpell))
+	IniWriteS($config, "Spells", "RageSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumRageSpell))
+	IniWriteS($config, "Spells", "HealSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumHealSpell))
+	IniWriteS($config, "Spells", "JumpSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumJumpSpell))
+	IniWriteS($config, "Spells", "FreezeSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumFreezeSpell))
+	IniWriteS($config, "Spells", "CloneSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumCloneSpell))
+	IniWriteS($config, "Spells", "PoisonSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumPoisonSpell))
+	IniWriteS($config, "Spells", "EarthSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumEarthSpell))
+	IniWriteS($config, "Spells", "HasteSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumHasteSpell))
+	IniWriteS($config, "Spells", "SkeletonSpell" & $itempcmbTroopSetting, GUICtrlRead($txtNumSkeletonSpell))
 
-IniWriteS($config, "Spells", "LightningSpell", GUICtrlRead($txtNumLightningSpell))
-IniWriteS($config, "Spells", "RageSpell", GUICtrlRead($txtNumRageSpell))
-IniWriteS($config, "Spells", "HealSpell", GUICtrlRead($txtNumHealSpell))
-IniWriteS($config, "Spells", "JumpSpell", GUICtrlRead($txtNumJumpSpell))
-IniWriteS($config, "Spells", "FreezeSpell", GUICtrlRead($txtNumFreezeSpell))
-IniWriteS($config, "Spells", "CloneSpell", GUICtrlRead($txtNumCloneSpell))
-IniWriteS($config, "Spells", "PoisonSpell", GUICtrlRead($txtNumPoisonSpell))
-IniWriteS($config, "Spells", "EarthSpell", GUICtrlRead($txtNumEarthSpell))
-IniWriteS($config, "Spells", "HasteSpell", GUICtrlRead($txtNumHasteSpell))
-IniWriteS($config, "Spells", "SkeletonSpell", GUICtrlRead($txtNumSkeletonSpell))
+
+;~ For $i = 0 To UBound($MySpells) - 1
+;~ 	If GUICtrlRead(Eval("chkPre" & $MySpells[$i][0])) = $GUI_CHECKED Then
+;~ 		IniWriteS($config, "MySpells", $MySpells[$i][0], 1)
+;~ 	Else
+;~ 		IniWriteS($config, "MySpells", $MySpells[$i][0], 0)
+;~ 	EndIf
+;~ Next
+
+;~ IniWriteS($config, "Spells", "LightningSpell", GUICtrlRead($txtNumLightningSpell))
+;~ IniWriteS($config, "Spells", "RageSpell", GUICtrlRead($txtNumRageSpell))
+;~ IniWriteS($config, "Spells", "HealSpell", GUICtrlRead($txtNumHealSpell))
+;~ IniWriteS($config, "Spells", "JumpSpell", GUICtrlRead($txtNumJumpSpell))
+;~ IniWriteS($config, "Spells", "FreezeSpell", GUICtrlRead($txtNumFreezeSpell))
+;~ IniWriteS($config, "Spells", "CloneSpell", GUICtrlRead($txtNumCloneSpell))
+;~ IniWriteS($config, "Spells", "PoisonSpell", GUICtrlRead($txtNumPoisonSpell))
+;~ IniWriteS($config, "Spells", "EarthSpell", GUICtrlRead($txtNumEarthSpell))
+;~ IniWriteS($config, "Spells", "HasteSpell", GUICtrlRead($txtNumHasteSpell))
+;~ IniWriteS($config, "Spells", "SkeletonSpell", GUICtrlRead($txtNumSkeletonSpell))

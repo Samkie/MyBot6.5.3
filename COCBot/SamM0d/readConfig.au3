@@ -119,23 +119,40 @@ For $i = 0 To UBound($MyTroops) - 1
 	IniReadS($MyTroops[$i][1],$config, "MyTroops", $MyTroops[$i][0] & "Order" & $icmbTroopSetting, $i + 1,"Int")
 Next
 
-For $i = 0 To UBound($MySpells) - 1
-	Local $tempPreSpell
-	IniReadS($tempPreSpell, $config, "MySpells", $MySpells[$i][0], "0", "Int")
-	Assign("ichkPre" & $MySpells[$i][0], $tempPreSpell)
-	;IniReadS($MySpells[$i][1], $config, "MyTroops", $MySpells[$i][0] & "Order", $i + 1)
-Next
+	For $i = 0 To UBound($MySpells) - 1
+		Local $tempPreSpell
+		IniReadS($tempPreSpell, $config, "MySpells", $MySpells[$i][0] & $icmbTroopSetting, "0", "Int")
+		Assign("ichkPre" & $MySpells[$i][0], $tempPreSpell)
+		;IniReadS($MySpells[$i][1], $config, "MyTroops", $MySpells[$i][0] & "Order", $i + 1)
+	Next
+	IniReadS($iLightningSpellComp, $config, "Spells", "LightningSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iRageSpellComp, $config, "Spells", "RageSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iHealSpellComp, $config, "Spells", "HealSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iJumpSpellComp, $config, "Spells", "JumpSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iFreezeSpellComp, $config, "Spells", "FreezeSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iCloneSpellComp, $config, "Spells", "CloneSpell" & $icmbTroopSetting, "0", "Int")
+	IniReadS($iPoisonSpellComp, $config, "Spells", "PoisonSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iHasteSpellComp, $config, "Spells", "HasteSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iEarthSpellComp, $config, "Spells", "EarthSpell" & $icmbTroopSetting, "0","Int")
+	IniReadS($iSkeletonSpellComp, $config, "Spells", "SkeletonSpell" & $icmbTroopSetting, "0", "Int")
 
-IniReadS($iLightningSpellComp, $config, "Spells", "LightningSpell", "0","Int")
-IniReadS($iRageSpellComp, $config, "Spells", "RageSpell", "0","Int")
-IniReadS($iHealSpellComp, $config, "Spells", "HealSpell", "0","Int")
-IniReadS($iJumpSpellComp, $config, "Spells", "JumpSpell", "0","Int")
-IniReadS($iFreezeSpellComp, $config, "Spells", "FreezeSpell", "0","Int")
-IniReadS($iCloneSpellComp, $config, "Spells", "CloneSpell", "0", "Int")
-IniReadS($iPoisonSpellComp, $config, "Spells", "PoisonSpell", "0","Int")
-IniReadS($iHasteSpellComp, $config, "Spells", "HasteSpell", "0","Int")
-IniReadS($iEarthSpellComp, $config, "Spells", "EarthSpell", "0","Int")
-IniReadS($iSkeletonSpellComp, $config, "Spells", "SkeletonSpell", "0", "Int")
+;~ For $i = 0 To UBound($MySpells) - 1
+;~ 	Local $tempPreSpell
+;~ 	IniReadS($tempPreSpell, $config, "MySpells", $MySpells[$i][0], "0", "Int")
+;~ 	Assign("ichkPre" & $MySpells[$i][0], $tempPreSpell)
+;~ 	;IniReadS($MySpells[$i][1], $config, "MyTroops", $MySpells[$i][0] & "Order", $i + 1)
+;~ Next
+
+;~ IniReadS($iLightningSpellComp, $config, "Spells", "LightningSpell", "0","Int")
+;~ IniReadS($iRageSpellComp, $config, "Spells", "RageSpell", "0","Int")
+;~ IniReadS($iHealSpellComp, $config, "Spells", "HealSpell", "0","Int")
+;~ IniReadS($iJumpSpellComp, $config, "Spells", "JumpSpell", "0","Int")
+;~ IniReadS($iFreezeSpellComp, $config, "Spells", "FreezeSpell", "0","Int")
+;~ IniReadS($iCloneSpellComp, $config, "Spells", "CloneSpell", "0", "Int")
+;~ IniReadS($iPoisonSpellComp, $config, "Spells", "PoisonSpell", "0","Int")
+;~ IniReadS($iHasteSpellComp, $config, "Spells", "HasteSpell", "0","Int")
+;~ IniReadS($iEarthSpellComp, $config, "Spells", "EarthSpell", "0","Int")
+;~ IniReadS($iSkeletonSpellComp, $config, "Spells", "SkeletonSpell", "0", "Int")
 
 ;$iTotalTrainSpaceSpell = 0
 ;For $i = 0 To 9
